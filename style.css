@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f7fa;
+  color: #333;
+}
+.calculator {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 20px;
+}
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+input[type="number"]:focus,
+select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+.radio-option input {
+  margin-right: 8px;
+}
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.checkbox-option input {
+  margin-right: 8px;
+}
+.hidden {
+  display: none;
+}
+.result {
+  background-color: #e8f4fc;
+  border-left: 4px solid #3498db;
+  padding: 15px 20px;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+.result h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+.service-description {
+  font-style: italic;
+  color: #7f8c8d;
+  margin-top: 5px;
+}

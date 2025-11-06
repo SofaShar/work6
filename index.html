@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <title>Калькулятор стоимости услуги</title>
+  </head>
+  <body>
+    <h1>Калькулятор стоимости услуги</h1>
+
+    <div class="calculator">
+      <div class="form-group">
+        <label for="quantity">Количество:</label>
+        <input type="number" id="quantity" min="1" value="1" />
+      </div>
+
+      <div class="form-group">
+        <label>Тип услуги:</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="type1"
+              name="serviceType"
+              value="basic"
+              checked
+            />
+            <label for="type1">Базовая услуга</label>
+          </div>
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="type2"
+              name="serviceType"
+              value="standard"
+            />
+            <label for="type2">Стандартная услуга</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="type3" name="serviceType" value="premium" />
+            <label for="type3">Премиум услуга</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="options-group" class="form-group hidden">
+        <label for="options">Опции услуги:</label>
+        <select id="options">
+          <option value="option1">Опция 1</option>
+          <option value="option2">Опция 2</option>
+          <option value="option3">Опция 3</option>
+        </select>
+      </div>
+
+      <div id="property-group" class="form-group hidden">
+        <label>Дополнительные свойства:</label>
+        <div class="checkbox-option">
+          <input type="checkbox" id="property" />
+          <label for="property">Расширенная гарантия</label>
+        </div>
+      </div>
+
+      <div class="result">
+        <h3>Итоговая стоимость:</h3>
+        <div class="price" id="total-price">100 руб.</div>
+        <div class="service-description" id="service-description">
+          Базовая услуга: 100 руб. за единицу
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
