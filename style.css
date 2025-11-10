@@ -1,90 +1,65 @@
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
 body {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5f7fa;
-  color: #333;
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 10px;
+  background-color: #f5f5f5;
 }
-.calculator {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  margin-top: 20px;
+h2 {
+  color: #2c2222;
 }
-h1 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 30px;
-}
-.form-group {
-  margin-bottom: 20px;
-}
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #2c3e50;
-}
-input[type="number"],
-select {
-  width: 100%;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-}
-input[type="number"]:focus,
-select:focus {
-  border-color: #3498db;
-  outline: none;
-}
-.radio-group {
+#radios {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
 }
-.radio-option {
-  display: flex;
-  align-items: center;
+.calculator {
+  background: rgb(246, 242, 242);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgb(246, 0, 0);
 }
-.radio-option input {
-  margin-right: 8px;
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #5d5454;
 }
-.checkbox-option {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
-.checkbox-option input {
-  margin-right: 8px;
+button {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-.hidden {
-  display: none;
+button:hover {
+  background-color: #ff8a04;
 }
 .result {
-  background-color: #e8f4fc;
-  border-left: 4px solid #3498db;
-  padding: 15px 20px;
-  margin-top: 25px;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e8f5e8;
   border-radius: 5px;
+  border-left: 4px solid #ff8a04;
+  display: none;
 }
-.result h3 {
-  margin-top: 0;
-  color: #2c3e50;
+.result.show {
+  display: block;
 }
-.price {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2c3e50;
-}
-.service-description {
-  font-style: italic;
-  color: #7f8c8d;
+.error {
+  color: #dc3545;
+  font-size: 14px;
   margin-top: 5px;
+  display: none;
 }
