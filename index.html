@@ -1,74 +1,88 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="GitLab Pages" />
+    <title>Plain HTML site using GitLab Pages</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="prodPrice">Выберите тип товара</div>
+    Тип товара:
+    <form>
+      <select name="prodType">
+        <option value="1">Product 1</option>
+        <option value="2">Product 2</option>
+        <option value="3">Product 3</option>
+      </select>
+      <div id="radios">
+        <label
+          ><input type="radio" name="prodOptions" value="option1" /> Опция
+          1</label
+        >
+        <label
+          ><input type="radio" name="prodOptions" value="option2" /> Опция
+          2</label
+        >
+      </div>
+      <div id="checkboxes">
+        <label><input type="checkbox" name="prop1" /> Свойство 1</label>
+        <label><input type="checkbox" name="prop2" /> Свойство 2</label>
+      </div>
+    </form>
+    <div class="form-group">
+      <label for="quantity">Количество товара:</label>
+      <input type="number" id="quantity" min="1" value="1" />
+      <div class="error" id="quantityError">
+        Введите корректное количество (минимум 1)
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <strong>Стоимость заказа: <span id="totalPrice">0</span> руб.</strong>
+    </div>
+  </body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
-    <title>Калькулятор стоимости услуги</title>
+    <title>work6</title>
   </head>
   <body>
-    <h1>Калькулятор стоимости услуги</h1>
-
     <div class="calculator">
+      <h2>Оформление заказа</h2>
       <div class="form-group">
-        <label for="quantity">Количество:</label>
-        <input type="number" id="quantity" min="1" value="1" />
-      </div>
-
-      <div class="form-group">
-        <label>Тип услуги:</label>
-        <div class="radio-group">
-          <div class="radio-option">
-            <input
-              type="radio"
-              id="type1"
-              name="serviceType"
-              value="basic"
-              checked
-            />
-            <label for="type1">Базовая услуга</label>
-          </div>
-          <div class="radio-option">
-            <input
-              type="radio"
-              id="type2"
-              name="serviceType"
-              value="standard"
-            />
-            <label for="type2">Стандартная услуга</label>
-          </div>
-          <div class="radio-option">
-            <input type="radio" id="type3" name="serviceType" value="premium" />
-            <label for="type3">Премиум услуга</label>
-          </div>
+        <label for="quantity">Количество товара:</label>
+        <input id="quantity" type="number" min="1" value="1" wfd-id="id0" />
+        <div class="'error" id="quantityError">
+          Введите количество товара(минимум 1)
         </div>
       </div>
-
-      <div id="options-group" class="form-group hidden">
-        <label for="options">Опции услуги:</label>
-        <select id="options">
-          <option value="option1">Опция 1</option>
-          <option value="option2">Опция 2</option>
-          <option value="option3">Опция 3</option>
-        </select>
+      <div id="radios">
+        <h3>доставка</h3>
+        <label><input type="radio" value="option1" name="option">на склад</label>
+        <label><input type="radio" value="option2" name="option">на пункт выдачи</label>
+        <label><input type="radio" value="option3" name="option">на дом</label>
+      </div>
+      <select name="selectors">
+        <h3>оплата</h3>
+        <option>сразу</option>
+        <option>при получении</option>
+        <option>частями</option>
+      </select>
+      <div id="checkboxes">
+        <label><input type="checkbox">согласен с обратботкой персональных данных</label>
       </div>
 
-      <div id="property-group" class="form-group hidden">
-        <label>Дополнительные свойства:</label>
-        <div class="checkbox-option">
-          <input type="checkbox" id="property" />
-          <label for="property">Расширенная гарантия</label>
-        </div>
-      </div>
-
-      <div class="result">
-        <h3>Итоговая стоимость:</h3>
-        <div class="price" id="total-price">100 руб.</div>
-        <div class="service-description" id="service-description">
-          Базовая услуга: 100 руб. за единицу
-        </div>
       </div>
     </div>
   </body>
 </html>
+-->
