@@ -1,126 +1,164 @@
-// Базовая стоимость для каждого типа услуги
-const basePrices = {
-  basic: 100,
-  standard: 200,
-  premium: 350,
-};
+function updatePrice() {
+  // Находим select по имени в DOM.
+  let s = document.getElementsByName("prodType");
+  let select = s[0];
+  let price = 0;
+  let prices = getPrices();
+  let priceIndex = parseInt(select.value) - 1;
+  if (priceIndex >= 0) {
+    price = prices.prodTypes[priceIndex];
+  }
 
-// Модификаторы стоимости для опций
-const optionModifiers = {
-  option1: 0,
-  option2: 50,
-  option3: 100,
-};
+  // Скрываем или показываем радиокнопки.
+  let radioDiv = document.getElementById("radios");
+  radioDiv.style.display = select.value == "2" ? "block" : "none";
 
-// Модификаторы стоимости для свойств
-const propertyModifiers = {
-  property: 50,
-};
-
-// Описания услуг
-const serviceDescriptions = {
-  basic: "Базовая услуга: 100 руб. за единицу",
-  standard: "Стандартная услуга: 200 руб. за единицу",
-  premium: "Премиум услуга: 350 руб. за единицу",
-};
-
-// Получение элементов DOM
-const quantityInput = document.getElementById("quantity");
-const serviceTypeRadios = document.querySelectorAll(
-  'input[name="serviceType"]'
-);
-const optionsGroup = document.getElementById("options-group");
-const optionsSelect = document.getElementById("options");
-const propertyGroup = document.getElementById("property-group");
-const propertyCheckbox = document.getElementById("property");
-const totalPriceElement = document.getElementById("total-price");
-const serviceDescriptionElement = document.getElementById(
-  "service-description"
-);
-
-// Функция для расчета стоимости
-function calculatePrice() {
-  // Получение выбранного типа услуги
-  let selectedType;
-  for (const radio of serviceTypeRadios) {
+  // Смотрим какая товарная опция выбрана.
+  let radios = document.getElementsByName("prodOptions");
+  radios.forEach(function (radio) {
     if (radio.checked) {
-      selectedType = radio.value;
-      break;
+      let optionPrice = prices.prodOptions[radio.value];
+      if (optionPrice !== undefined) {
+        price += optionPrice;
+      }
     }
-  }
-
-  // Получение количества
-  const quantity = parseInt(quantityInput.value) || 1;
-
-  // Базовая стоимость
-  let price = basePrices[selectedType];
-
-  // Добавление стоимости опции (если применимо)
-  if (
-    selectedType === "standard" &&
-    !optionsGroup.classList.contains("hidden")
-  ) {
-    const selectedOption = optionsSelect.value;
-    price += optionModifiers[selectedOption];
-  }
-
-  // Добавление стоимости свойства (если применимо)
-  if (
-    selectedType === "premium" &&
-    !propertyGroup.classList.contains("hidden") &&
-    propertyCheckbox.checked
-  ) {
-    price += propertyModifiers.property;
-  }
-
-  // Обновление отображаемой цены
-  totalPriceElement.textContent = price * quantity + " руб.";
-
-  // Обновление описания услуги
-  serviceDescriptionElement.textContent = serviceDescriptions[selectedType];
-}
-
-// Функция для обновления видимости элементов формы
-function updateFormVisibility() {
-  // Получение выбранного типа услуги
-  let selectedType;
-  for (const radio of serviceTypeRadios) {
-    if (radio.checked) {
-      selectedType = radio.value;
-      break;
-    }
-  }
-
-  // Управление видимостью элементов формы в зависимости от типа услуги
-  switch (selectedType) {
-    case "basic":
-      optionsGroup.classList.add("hidden");
-      propertyGroup.classList.add("hidden");
-      break;
-    case "standard":
-      optionsGroup.classList.remove("hidden");
-      propertyGroup.classList.add("hidden");
-      break;
-    case "premium":
-      optionsGroup.classList.add("hidden");
-      propertyGroup.classList.remove("hidden");
-      break;
-  }
-}
-
-// Назначение обработчиков событий
-quantityInput.addEventListener("input", calculatePrice);
-
-for (const radio of serviceTypeRadios) {
-  radio.addEventListener("change", function () {
-    updateFormVisibility();
-    calculatePrice();
   });
+
+  // Скрываем или показываем чекбоксы.
+  let checkDiv = document.getElementById("checkboxes");
+  checkDiv.style.display = select.value != "3" ? "none" : "block";
+
+  // Смотрим какие товарные свойства выбраны.
+  let checkboxes = document.querySelectorAll("#checkboxes input");
+  checkboxes.forEach(function (checkbox) {
+    if (checkbox.checked) {
+      let propPrice = prices.prodProperties[checkbox.name];
+      if (propPrice !== undefined) {
+        price += propPrice;
+      }
+    }
+  });
+
+  const quantityInput = document.getElementById("quantity");
+  const resultDiv = document.getElementById("result");
+  const quantityError = document.getElementById("quantityError");
+  const quantity = parseInt(quantityInput.value);
+
+  if (isNaN(quantity) || quantity < 1) {
+    quantityError.style.display = "block";
+    resultDiv.classList.remove("show");
+    return;
+  } else {
+    quantityError.style.display = "none";
+  }
+
+  const total = price * quantity;
+  const formattedTotal = total.toLocaleString("ru-RU");
+
+  const totalPriceSpan = document.getElementById("totalPrice");
+  totalPriceSpan.textContent = formattedTotal;
+  resultDiv.classList.add("show");
+
+  let prodPrice = document.getElementById("prodPrice");
+  prodPrice.innerHTML = price + " рублей";
 }
 
-optionsSelect.addEventListener("change", calculatePrice);
-propertyCheckbox.addEventListener("change", calculatePrice);
+function getPrices() {
+  return {
+    prodTypes: [100, 200, 150],
+    prodOptions: {
+      option2: 10,
+      option3: 5,
+    },
+    prodProperties: {
+      prop1: 1,
+      prop2: 2,
+    },
+  };
+}
 
-// Инициализация формы
-updateFormVisibility();
-calculatePrice();
+window.addEventListener("DOMContentLoaded", function (event) {
+  // Скрываем радиокнопки.
+  let radioDiv = document.getElementById("radios");
+  radioDiv.style.display = "none";
+
+  // Находим select по имени в DOM.
+  let s = document.getElementsByName("prodType");
+  let select = s[0];
+  // Назначаем обработчик на изменение select.
+  select.addEventListener("change", function (event) {
+    let target = event.target;
+    console.log(target.value);
+    updatePrice();
+  });
+
+  // Назначаем обработчик радиокнопок.
+  let radios = document.getElementsByName("prodOptions");
+  radios.forEach(function (radio) {
+    radio.addEventListener("change", function (event) {
+      let r = event.target;
+      console.log(r.value);
+      updatePrice();
+    });
+  });
+
+  // Назначаем обработчик радиокнопок.
+  let checkboxes = document.querySelectorAll("#checkboxes input");
+  checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function (event) {
+      let c = event.target;
+      console.log(c.name);
+      console.log(c.value);
+      updatePrice();
+    });
+  });
+
+  updatePrice();
+});
+
+/*document.addEventListener("DOMContentLoaded", function () {
+  const productSelect = document.getElementById("product");
+  const quantityInput = document.getElementById("quantity");
+  const calculateBtn = document.getElementById("calculateBtn");
+  const resultDiv = document.getElementById("result");
+  const totalPriceSpan = document.getElementById("totalPrice");
+  const quantityError = document.getElementById("quantityError");
+
+  function calculateTotal() {
+    const price = parseFloat(productSelect.value);
+    const quantity = parseInt(quantityInput.value);
+
+    if (isNaN(quantity) || quantity < 1) {
+      quantityError.style.display = "block";
+      resultDiv.classList.remove("show");
+      return;
+    } else {
+      quantityError.style.display = "none";
+    }
+
+    const total = price * quantity;
+
+    const formattedTotal = total.toLocaleString("ru-RU");
+
+    totalPriceSpan.textContent = formattedTotal;
+    resultDiv.classList.add("show");
+  }
+
+  calculateBtn.addEventListener("click", calculateTotal);
+
+  quantityInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      calculateTotal();
+    }
+  });
+
+  quantityInput.addEventListener("input", function () {
+    const quantity = parseInt(this.value);
+    if (isNaN(quantity) || quantity < 1) {
+      quantityError.style.display = "block";
+    } else {
+      quantityError.style.display = "none";
+    }
+  });
+});
+*/
